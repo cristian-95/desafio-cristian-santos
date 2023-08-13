@@ -23,13 +23,12 @@ class CaixaDaLanchonete {
         }
         let codigosDoPedido = [];
         let subtotal = 0.0;
-
         
         for (const item of itens){
             
             let entrada = item.split(',')
             let codigo = entrada[0];
-            let quantidade = parseInt(entrada[1]);
+            const quantidade = parseInt(entrada[1]);
             
             if (quantidade < 1){
                 return 'Quantidade inválida!'
@@ -37,7 +36,7 @@ class CaixaDaLanchonete {
 
             if (this.CARDAPIO.has(codigo)){
                 codigosDoPedido.push(codigo);
-                let requisito =  this.CARDAPIO.get(codigo)[1];    
+                const requisito =  this.CARDAPIO.get(codigo)[1];    
                 if (requisito != false && !(codigosDoPedido.includes(requisito))) return 'Item extra não pode ser pedido sem o principal';                
             } else{
                 return 'Item inválido!'
@@ -51,7 +50,7 @@ class CaixaDaLanchonete {
         } else if (metodoDePagamento === 'dinheiro'){
             subtotal -= subtotal * this.DESCONTO;
         }
-        let valor = subtotal.toFixed(2).toString().replace('.',',');
+        const valor = subtotal.toFixed(2).toString().replace('.',',');
         
         return `R$ ${valor}`;
     }
